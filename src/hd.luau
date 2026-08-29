@@ -1,22 +1,449 @@
---[[
- ________  _______   ________  ________     ___       ___  ___  ________    
-|\_____  \|\  ___ \ |\   __  \|\   __  \   |\  \     |\  \|\  \|\   __  \   
- \|___/  /\ \   __/|\ \  |\  \ \  |\  \  \ \  \    \ \  \\\  \ \  |\  \  
-     /  / /\ \  \_|/_\ \   _  _\ \  \\\  \  \ \  \    \ \  \\\  \ \   __  \ 
-    /  /_/__\ \  \_|\ \ \  \\  \\ \  \\\  \  \ \  \____\ \  \\\  \ \  \ \  \ 
-   |\________\ \_______\ \__\\ _\\ \_______\  \ \_______\ \_______\ \__\ \__\
-    \|_______|\|_______|\|__|\|__|\|_______|   \|_______|\|_______|\|__|\|__|
+local GAME_PLACE_ID = 72167803024670
+if game.PlaceId ~= GAME_PLACE_ID then
+	game:GetService("StarterGui"):SetCore("SendNotification", {
+		Title = "Wrong Game",
+		Text = "This script only works in Find Who Slapped. Unloading.",
+		Duration = 6,
+	})
+	error("HB Slap: this script only works in Find Who Slapped (Wrong Game)")
+end
 
-               [ ZERO LUA V7.0 ]  —  https://zerolua.pages.dev
---]]
+local Players = game:GetService("Players")
+local RS = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
+local StarterGui = game:GetService("StarterGui")
+local CoreGui = game:GetService("CoreGui")
+local UserInputService = game:GetService("UserInputService")
+local Events = RS.Events
+local ASY = Enum.AutomaticSize.Y
+local GFM = Enum.Font.Gotham
+local GFB = Enum.Font.GothamBold
+local TL = Enum.TextXAlignment.Left
+local MAG_NEAR = 60 * 60
+local PEAK_THRESHOLD = 0.96
+local lp = Players.LocalPlayer
 
-return((function(...)local _al=(getgenv and(type(getgenv)=="function" and select(2,pcall(getgenv)))) or(type(_G)=="table" and _G) or(type(shared)=="table" and shared) or _ENV or{};local _bs={};local _cz={};local _dG=nil;local _eN=rawget or(_G and _G.rawget) or function(_al,_bs)if type(_al)=="table" then local _cz,_dG=pcall(function()return _al[_bs];end);if _cz then return _dG;end;end;return nil;end;local _fU={};local function _g1(_al)return type(_al)=="table" and _eN(_al,_fU)==true;end;local function _h8(_al,_bs,_cz)if not _al then return;end;_bs=_bs or 1;_cz=_cz or(_al and((_al.n or#_al))) or 0;if _bs>_cz then return;end;local _dG=unpack or(table and table.unpack) or(_G and((_G.unpack or(_G.table and _G.table.unpack))));if _dG then return _dG(_al,_bs,_cz);end;if _bs==_cz then return _al[_bs];end;if _cz-_bs==1 then return _al[_bs],_al[_bs+1];end;if _cz-_bs==2 then return _al[_bs],_al[_bs+1],_al[_bs+2];end;if _cz-_bs==3 then return _al[_bs],_al[_bs+1],_al[_bs+2],_al[_bs+3];end;return _al[_bs],_h8(_al,_bs+1,_cz);end;local function _ie(_al,_bs,_cz,_dG)local _g1=_al[(_bs*_cz+_dG)+1];if type(_g1)=="table" and _eN(_g1,_fU)==true then return _g1[1];end;return _g1;end;local function _jl(_al,_bs,_cz,_dG,_g1)local _h8=((_bs*_cz+_dG)+1);local _ie=_al[_h8];if type(_ie)=="table" and _eN(_ie,_fU)==true then _ie[1]=_g1;else _al[_h8]=_g1;end;end;local _ks=((function()local _al=0;if type(pcall)=="function" then _al=_al+37;end;if type(type)=="function" then _al=_al+43;end;if type(tostring)=="function" then _al=_al+59;end;if type(string)=="table" or(_G and type(_G.string)=="table") then _al=_al+71;end;if type(table)=="table" or(_G and type(_G.table)=="table") then _al=_al+83;end;return _al%256;end))();local _lz=(string and string.char) or(_G and(_G.string and _G.string.char)) or string.char;local _mG=(string and string.byte) or(_G and(_G.string and _G.string.byte)) or string.byte;local _nN=(string and string.sub) or(_G and(_G.string and _G.string.sub)) or string.sub;local _oU=(table a
-nd table.concat) or(_G and(_G.table and _G.table.concat)) or table.concat;local _p1=2156307;local _q8=0;local _re=((function()local _al={};local _bs=114;for _cz=33,125,1 do local _dG=((_cz+_bs))%256;if _dG~=148 and(_dG~=153 and(_dG~=158 and(_dG~=160 and(_dG~=161 and(_dG~=172 and(_dG~=206 and _dG~=210)))))) then _al[#_al+1]=_cz;end;end;local _cz=((14963961+((_q8==0 and 37 or 0))*229))%16777213;for _bs=#_al,2,-1 do _cz=((_cz*16073+50278))%16777213;local _dG=(_cz%_bs)+1;_al[_bs],_al[_dG]=_al[_dG],_al[_bs];end;local _dG={};for _bs=1,#_al,1 do _dG[_al[_bs]]=_bs-1;end;return _dG;end))();local _sl=85;local _ts=84;local function _uz(_al)if type(_al)~="string" then return _al;end;local _bs=#_al;local _cz=(table and(table.create and table.create(_bs))) or{};local _dG=1;local _eN=1;while _eN<=_bs do local _fU=(_bs-_eN)+1;local _g1=_fU>=5 and 5 or _fU;local _h8=0;for _bs=0,4,1 do local _cz=_ts;if _bs<_g1 then local _dG=_mG(_al,_eN+_bs);_cz=_re[_dG] or 0;end;_h8=_h8*_sl+_cz;end;_eN=_eN+_g1;local _ie=_g1-1;local _jl=_h8%256;_h8=math.floor(_h8/256);local _ks=_h8%256;_h8=math.floor(_h8/256);local _lz=_h8%256;_h8=math.floor(_h8/256);local _nN=_h8%256;if _ie>=1 then _cz[_dG]=_nN;_dG=_dG+1;end;if _ie>=2 then _cz[_dG]=_lz;_dG=_dG+1;end;if _ie>=3 then _cz[_dG]=_ks;_dG=_dG+1;end;if _ie>=4 then _cz[_dG]=_jl;_dG=_dG+1;end;end;return _cz;end;local function _vG(_al,_bs,_cz)local _dG=((650607+_q8))%16777213;local _eN=80;if _cz==2 then local _cz=((_dG+_al*19))%256;local _fU=((_eN+_bs*31))%256;local _g1=((_fU*37+_dG*13))%256;local _h8=((_cz+_g1))%256;local _ie=_fU;local _jl=((_h8*73+_eN*17))%256;local _ks=((_ie+_jl))%256;local _lz=_h8;local _mG=_lz;local _nN=_ks;local _oU=(((_lz*53+_ks*89)+_al*7))%256;local _p1=(((_ks*97+_lz*11)+_bs*23))%256;return{_mG,_nN,_oU,_p1};elseif _cz==3 then local _cz=((_al*13+_bs))%256;local _fU=((((((_dG%256))*_cz+_eN))*_cz+_al*17))%256;local _g1=((((((_eN*_cz+(_dG%256)))*_cz+_bs*29))%256+13))%256;local _h8=((((((_fU*_cz+_g1))*_cz+_dG*7))%256+37))%256;local _ie=(((((
-(_g1*_cz+_h8))*_cz+_eN*19))%256+71))%256;return{_fU,_g1,_h8,_ie};else local _cz=(((_dG*37+_al*13)+_bs*7))%256;local _fU=(((_dG*73+_al*199)+_eN*17))%256;local _g1=(((_eN*53+_al*89)+_bs*23))%256;local _h8=(((_dG*11+_eN*97)+_bs*43))%256;return{_cz,_fU,_g1,_h8};end;end;local _wN=_vG((((_p1*23+23655))%65536),(((_p1*31+21353))%65536),((((_p1*45+2))%3)+1));local _xU=#_wN;if _xU==0 then _wN={17,31,53,97};_xU=4;end;local function _y1(_al)if type(_al)~="string" then return 0;end;local _bs=(20533322);for _cz=1,#_al,1 do _bs=((((_bs*16777619+_mG(_al,_cz)*31)+41))%2147483647);end;return _bs;end;local function _z8(_al,_bs)if type(_al)=="string" then return _al;end;if type(_al)~="table" then return tostring(_al);end;local _cz=#_al;if _cz==0 then return"";end;_bs=_bs or 1;local _dG=(650607+_q8);local _eN=(((((_dG*7+_bs*13))%128))*2+1);local _fU={};local _g1=((_dG*31+_cz*17))%256;for _bs=1,_cz,1 do local _cz=(((_dG*17+_bs*19)+_g1*7))%256;local _h8=((_al[_bs]*_eN+_cz))%256;_fU[_bs]=_h8;_g1=(((_g1*41+_al[_bs]*13)+_h8*7))%256;end;return _lz(_h8(_fU,1,_cz));end;local _Ae={};local function _Bl(_al,_bs)if not _al then return nil;end;local _cz=_Ae[_bs];if _cz~=nil then return _cz;end;local _dG=_al[_bs];if _dG==nil then return nil;end;local _eN=_dG;if type(_dG)=="table" and((#_dG==0 or type(_dG[1])=="number" or _dG._arith)) then _eN=_z8(_dG._arith or _dG,_bs);elseif type(_dG)=="table" and(type(_dG[1])=="string" and(type(_dG[2])~="table" and type(_dG[3])~="number")) then local _al={};local _cz=((((_bs*13+135388))%4)+1);for _dG,_eN in ipairs(_dG) do local _fU={};local _g1=_uz(_eN);local _h8=((((_bs*37+_dG*41)+55748)+(((_bs*_bs)*3))%256))%256;for _al=1,#_g1,1 do local _eN=_g1[_al];local _ie=_eN;if _cz==1 then local _cz=_wN[(((((_bs*7+_dG*11)+_al*13)+_h8))%_xU)+1] or 42;local _fU=((((((12361533+_bs*31)+_dG*47)+_al*23)+_cz*17)+_h8*13))%256;_ie=(((_eN-_fU)+256))%256;_h8=(((_h8*31+_eN*17)+_ie*7))%256;elseif _cz==2 then local _cz=_wN[(((((_bs*17+_dG*19)+_al*23)+_h8))%_xU)+1] or 53;local _fU=(((((((
-(((_al*17+_bs*23)+_dG*43)+_h8*7)+(111)))%256))*_al+_cz*13)+59))%256;_ie=(((_eN-_fU)+256))%256;_h8=((((_h8*41+_eN*23)+_ie*11)+17))%256;elseif _cz==3 then local _cz=_wN[(((((_bs*31+_dG*19)+_al*29)+_h8))%_xU)+1] or 79;local _fU=(((((((18867603+_bs*43)+_dG*53)+_al*37)+_cz*19)+_h8*11)+43))%256;_ie=(((_eN-_fU)+256))%256;_h8=((((_h8*47+_eN*29)+_ie*13)+31))%256;else local _cz=_wN[(((((_bs*13+_dG*29)+_al*17)+_h8))%_xU)+1] or 97;local _fU=((((((7156677+_bs*19)+_dG*23)+_al*31)+_cz*7)+_h8*5))%256;_ie=(((((((_eN-_fU)+256))%256))*43))%256;_h8=((((_h8*53+_eN*29)+_ie*13)+37))%256;end;_fU[_al]=_lz(_ie);end;_al[_dG]=_oU(_fU);end;_eN=_oU(_al);elseif type(_dG)=="string" then local _al={};local _cz=_uz(_dG);for _dG=1,#_cz,1 do local _eN=_cz[_dG];local _fU=((((8457891+_bs*17)+_dG*19)+_wN[((((_bs+_dG)-1))%_xU)+1]))%256;local _g1=(((_eN-_fU)+256))%256;_al[_dG]=_lz(_g1);end;_eN=_oU(_al);end;_Ae[_bs]=_eN;return _eN;end;local function _Cs(_al,_bs)if _al==nil or _bs==nil then return nil;end;if type(_al)=="table" then return _al[_bs];end;local _cz,_dG=pcall(function()return _al[_bs];end);return _cz and _dG or nil;end;local function _Dz(_al,_bs,_cz)if _al==nil or _bs==nil then return;end;local _dG=type(_al);if _dG=="table" then _al[_bs]=_cz;elseif _dG=="userdata" then pcall(function()_al[_bs]=_cz;end);end;end;local function _EG(_al,_bs,_cz)if _al==nil or _bs==nil then return nil;end;local _dG=type(_al);local _eN=type(_bs);if _dG=="number" and _eN=="number" then if _cz==1 then return _al+_bs;elseif _cz==2 then return _al-_bs;elseif _cz==3 then return _al*_bs;elseif _cz==4 then return _al/_bs;elseif _cz==5 then return _al%_bs;elseif _cz==6 then return _al^_bs;end;end;local _fU,_g1=pcall(function()if _cz==1 then return _al+_bs;elseif _cz==2 then return _al-_bs;elseif _cz==3 then return _al*_bs;elseif _cz==4 then return _al/_bs;elseif _cz==5 then return _al%_bs;elseif _cz==6 then return _al^_bs;end;end);return _fU and _g1 or nil;end;local function _FN(_bs,_cz)if _cz==nil then return nil;end;if _bs and type(_bs)=="table" then local _al=_bs[_cz];if _al~=nil then return _al;end;end;local _dG=_al;if _dG and type(_dG)=="table" then local _al=_dG[_cz];if _al~=nil then return _al;end;end;if type(_G)=="table" then local _al=_G[_cz];if _al~=nil then return _al;end;end;if getgenv and type(getgenv)=="function" then local _al,_bs=pcall(getgenv);if _al and type(_bs)=="table" then local _al=_bs[_cz];if _al~=nil then return _al;end;end;end;if type(shared)=="table" then local _al=shared[_cz];if _al~=nil then return _al;end;end;if getrenv and type(getrenv)=="function" then local _al,_bs=pcall(getrenv);if _al and type(_bs)=="table" then local _al=_bs[_cz];if _al~=nil then return _al;end;end;end;if _cz==_lz(117,110,112,97,99,107) then return(table and table.unpack) or(_G and(_G.table and _G.table.unpack)) or unpack or _h8;end;return nil;end;local function _GU(_al,_bs,_cz,_dG,_eN,_fU,_g1,_ks)if _al==nil then if _dG>0 then for _al=1,_dG,1 do _jl(_eN,(_bs+_al)-1,_fU,_g1,nil);end;end;return;end;if _dG==0 then if _cz==0 then _al();elseif _cz==1 then _al(_ie(_eN,_bs+1,_fU,_g1));elseif _cz==2 then _al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1));elseif _cz==3 then _al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1));elseif _cz==4 then _al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1));elseif _cz==5 then _al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1));elseif _cz==6 then _al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_
-fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1),_ie(_eN,_bs+6,_fU,_g1));elseif _cz==-1 then _al(_h8(_ks));elseif _cz<=-100 then local _dG=(-_cz)-100;local _jl={};for _al=1,_dG,1 do _jl[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;local _lz=(_ks and((_ks.n or#_ks))) or 0;for _al=1,_lz,1 do _jl[_dG+_al]=_ks[_al];end;_al(_h8(_jl,1,_dG+_lz));else local _dG={};for _al=1,_cz,1 do _dG[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;_al(_h8(_dG,
-1,_cz));end;elseif _dG==1 then local _dG;if _cz==0 then _dG=_al();elseif _cz==1 then _dG=_al(_ie(_eN,_bs+1,_fU,_g1));elseif _cz==2 then _dG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1));elseif _cz==3 then _dG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1));elseif _cz==4 then _dG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1));elseif _cz==5 then _dG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1));elseif _cz==6 then _dG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1),_ie(_eN,_bs+6,_fU,_g1));elseif _cz==-1 then _dG=_al(_h8(_ks));elseif _cz<=-100 then local _jl=(-_cz)-100;local _lz={};for _al=1,_jl,1 do _lz[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;local _mG=(_ks and((_ks.n or#_ks))) or 0;for _al=1,_mG,1 do _lz[_jl+_al]=_ks[_al];end;_dG=_al(_h8(_lz,1,_jl+_mG));else local _jl={};for _al=1,_cz,1 do _jl[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;_dG=_al(_h8(_jl,1,_cz));end;_jl(_eN,_bs,_fU,_g1,_dG);elseif _dG==2 then local _dG,_lz;if _cz==0 then _dG,_lz=_al();elseif _cz==1 then _dG,_lz=_al(_ie(_eN,_bs+1,_fU,_g1));elseif _cz==2 then _dG,_lz=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1));elseif _cz==3 then _dG,_lz=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1));elseif _cz==4 then _dG,_lz=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1));elseif _cz==5 then _dG,_lz=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1));elseif _cz==6 then _dG,_lz=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1),_ie(_eN,_bs+6,_fU,_g1));elseif _cz==-1 then _dG,_lz=_al(_h8(_ks));elseif _cz<=-100 then local _jl=(-_cz)-100;local _mG={};for _al=1,_jl,1 do _mG[_al]=_ie(_eN,_bs+_al,_fU,_g1);en
-d;local _nN=(_ks and((_ks.n or#_ks))) or 0;for _al=1,_nN,1 do _mG[_jl+_al]=_ks[_al];end;_dG,_lz=_al(_h8(_mG,1,_jl+_nN));else local _jl={};for _al=1,_cz,1 do _jl[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;_dG,_lz=_al(_h8(_jl,1,_cz));end;_jl(_eN,_bs,_fU,_g1,_dG);_jl(_eN,_bs+1,_fU,_g1,_lz);elseif _dG==3 then local _dG,_lz,_mG;if _cz==0 then _dG,_lz,_mG=_al();elseif _cz==1 then _dG,_lz,_mG=_al(_ie(_eN,_bs+1,_fU,_g1));elseif _cz==2 then _dG,_lz,_mG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1));elseif _cz==3 then _dG,_lz,_mG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1));elseif _cz==4 then _dG,_lz,_mG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1));elseif _cz==5 then _dG,_lz,_mG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1));elseif _cz==6 then _dG,_lz,_mG=_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1),_ie(_eN,_bs+6,_fU,_g1));elseif _cz==-1 then _dG,_lz,_mG=_al(_h8(_ks));elseif _cz<=-100 then local _jl=(-_cz)-100;local _nN={};for _al=1,_jl,1 do _nN[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;local _oU=(_ks and((_ks.n or#_ks))) or 0;for _al=1,_oU,1 do _nN[_jl+_al]=_ks[_al];end;_dG,_lz,_mG=_al(_h8(_nN,1,_jl+_oU));else local _jl={};for _al=1,_cz,1 do _jl[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;_dG,_lz,_mG=_al(_h8(_jl,1,_cz));end;_jl(_eN,_bs,_fU,_g1,_dG);_jl(_eN,_bs+1,_fU,_g1,_lz);_jl(_eN,_bs+2,_fU,_g1,_mG);else local _lz;if _cz==0 then _lz={_al()};elseif _cz==1 then _lz={_al(_ie(_eN,_bs+1,_fU,_g1))};elseif _cz==2 then _lz={_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1))};elseif _cz==3 then _lz={_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1))};elseif _cz==4 then _lz={_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1))};elseif _cz==5 then _lz={_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_
-fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1))};elseif _cz==6 then _lz={_al(_ie(_eN,_bs+1,_fU,_g1),_ie(_eN,_bs+2,_fU,_g1),_ie(_eN,_bs+3,_fU,_g1),_ie(_eN,_bs+4,_fU,_g1),_ie(_eN,_bs+5,_fU,_g1),_ie(_eN,_bs+6,_fU,_g1))};elseif _cz==-1 then _lz={_al(_h8(_ks))};elseif _cz<=-100 then local _dG=(-_cz)-100;local _jl={};for _al=1,_dG,1 do _jl[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;local _mG=(_ks and((_ks.n or#_ks))) or 0;for _al=1,_mG,1 do _jl[_dG+_al]=_ks[_al];end;_lz={_al(_h8(_jl,1,_dG+_mG))};else local _dG={};for _al=1,_cz,1 do _dG[_al]=_ie(_eN,_bs+_al,_fU,_g1);end;_lz={_al(_h8(_dG,1,_cz))};end;if _dG>0 then for _al=1,_dG,1 do _jl(_eN,(_bs+_al)-1,_fU,_g1,_lz[_al]);end;elseif _dG<0 then local _al=_lz.n or#_lz;for _al=1,_al,1 do _jl(_eN,(_bs+_al)-1,_fU,_g1,_lz[_al]);end;end;end;end;local function _H1(_al,_bs,_cz,_dG,_eN,_h8,_ie,_jl)local _ks={};local _lz=(_al and _al[3]) or{};for _al=1,#_lz,1 do local _bs=_lz[_al];if _bs[1]==1 or _bs[1]==true then local _cz=_dG and _dG[_bs[2]+1];if not _g1(_cz) then _cz={[_fU]=true,[1]=_cz};if _dG then _dG[_bs[2]+1]=_cz;end;end;_ks[_al]=_cz;else local _cz=((_bs[2]*_h8+_ie)+1);local _dG=_eN[_cz];if not _g1(_dG) then _dG={[_fU]=true,[1]=_dG};_eN[_cz]=_dG;end;_ks[_al]=_dG;end;end;return function(...)return _jl(_al,_bs,_cz,_ks,nil,...);end;end;local function _I8(_al,_bs,_cz,_dG,_g1,...)local _ie=_al[1] or"";if type(_ie)=="string" then _ie=_uz(_ie);_al[1]=_ie;end;local _jl=_al[2] or{};local _ks=_jl[1] or 0;local _lz=_jl[2] or 0;local _mG=_jl[3] or 1;local _nN=_jl[4] or 257;local _oU=_jl[5];local _p1=(_oU and((((_oU-18867603)+65536000))%65536)) or#_ie;local _q8=(((_ks-11060319)+65536000))%65536;local _re=(((_mG-12361533)+65536000))%65536;local _sl=(((_nN-14963961)+65536000))%65536;local _ts=(_re%4);if _ts==0 then _ts=1;end;local _wN=math.floor(_re/4)%8;local _xU=math.floor(_re/32)%8;if _xU==0 then _xU=1;end;local _y1=math.floor(_sl/256);if _y1%2==0 then _y1=_y1+1;end;local _Ae=_sl%256;local _Je=_al[3] or{};local _Kl=((_q8*31+17))%256;if _Kl%2==0 then _Kl=_Kl+1;end;local _Ls=((_q8*43+71))%256;local _Mz=(((((_q8*31+_re*17)+_sl*13)+101))%16777213);local _NG=_vG(_q8,_p1,_ts);local _ON=#_NG;if _ON==0 then _NG={17,31,53,97};_ON=4;end;local _PU=((_q8*19+71))%256;local _Q1=((_q8*37+137))%256;local _R8=((_q8*43))%256;local _Se={};local _Tl={};local function _Us(_al)local _bs=math.floor(((_al-1))/64);local _cz=_Se[_bs];if not _cz then _cz={};local _al=_bs*64+1;for _bs=0,71,1 do local _dG=_al+_bs;local _eN=_NG[(((_dG-1))%_ON)+1] or 17;local _fU=_NG[(((_dG*3-1))%_ON)+1] or 31;local _g1=(((_eN*37+_PU)+_dG*23))%256;local _h8=(((_fU*53+_Q1)+_dG*31))%256;local _ie=((((_g1*73+_h8*89)+_eN*31)+_R8))%256;local _jl=((((_h8*47+_g1*59)+_fU*17)+_dG*29))%256;_cz[_bs+1]=(((_ie*53+_jl*67)+_dG*41))%256;end;_Se[_bs]=_cz;end;_Tl=_cz;return((_al-1))%64;end;local _Vz={};local _WG=select("#",...);local _XN=_g1;if not _XN then local _al=math.max(0,_WG-_lz);_XN={n=_al};for _al=1,_al,1 do _XN[_al]=select(_lz+_al,...);end;end;for _al=1,_lz,1 do local _bs=((((_al-1))*_y1+_Ae)+1);local _cz=nil;if _al<=_WG then _cz=select(_al,...);end;_Vz[_bs]=_cz;end;local function _YU(_al)local _bs=_Vz[(_al*_y1+_Ae)+1];if type(_bs)=="table" and _eN(_bs,_fU)==true then return _bs[1];end;return _bs;end;local function _Z1(_al,_bs)local _cz=((_al*_y1+_Ae)+1);local _dG=_Vz[_cz];if type(_dG)=="table" and _eN(_dG,_fU)==true then _dG[1]=_bs;else _Vz[_cz]=_bs;end;end;local function ab(_al)return _Bl(_bs,_al);end;local bb=1;local cb=#_ie;local db=_al._dec;if not db then db={};local _bs=1;while not((_bs>cb)) do local _al=_bs;local _cz=_Us(_al);local _dG=_Tl[_cz+1] or 0;local _eN=_Tl[_cz+2] or 0;local _fU=_ie[_al] or 0;local _g1=_ie[_al+1] or 0;local _h8=(((_fU-_dG)+256))%256;local _jl=(((_g1-_eN)+256))%256;local _ks=(((_jl*256+_h8))-32768);loca
-l _lz=math.floor(_ks/4);local _mG=_ks%4;local _nN=_mG+2;local _oU=0;local _p1=0;local _q8=0;local _re=_Tl[_cz+3] or 0;local _sl=_Tl[_cz+4] or 0;local _ts=_ie[_al+2] or 0;local _uz=_ie[_al+3] or 0;local _vG=(((_ts-_re)+256))%256;lo
-cal _xU=(((_uz-_sl)+256))%256;_oU=(((_xU*256+_vG))-32768);if _nN>=3 then local _bs=_Tl[_cz+5] or 0;local _dG=_Tl[_cz+6] or 0;local _eN=_ie[_al+4] or 0;local _fU=_ie[_al+5] or 0;local _g1=(((_eN-_bs)+256))%256;local _h8=(((_fU-_dG)+256))%256;_p1=(((_h8*256+_g1))-32768);end;if _nN==4 then local _bs=_Tl[_cz+7] or 0;local _dG=_Tl[_cz+8] or 0;local _eN=_ie[_al+6] or 0;local _fU=_ie[_al+7] or 0;local _g1=(((_eN-_bs)+256))%256;local _h8=(((_fU-_dG)+256))%256;_q8=(((_h8*256+_g1))-32768);end;local _y1=((_al*13))%256;local _z8=(((_lz*_Kl+_Ls)+_y1))%256;local _Ae,_Bl,_Cs;if _nN==4 then if _wN==1 then _Cs=_oU;_Ae=_p1;_Bl=_q8;elseif _wN==2 then _Bl=_oU;_Cs=_p1;_Ae=_q8;elseif _wN==3 then _Ae=_oU;_Cs=_p1;_Bl=_q8;elseif _wN==4 then _Bl=_oU;_Ae=_p1;_Cs=_q8;elseif _wN==5 then _Cs=_oU;_Bl=_p1;_Ae=_q8;else _Ae=_oU;_Bl=_p1;_Cs=_q8;end;else _Ae=_oU;_Bl=_p1;_Cs=_q8;end;db[_al]={_z8,_Ae,_Bl,_Cs,_al+_nN*2};_bs=_al+_nN*2;end;_al._dec=db;end;while not((bb>cb)) do local _al=db[bb];if not _al then break;end;local _eN=_al[1];local _fU=_al[2];local _g1=_al[3];local _ie=_al[4];bb=_al[5];_Mz=(((_Mz*31+_eN)+((tonumber(_fU) or 0))*7))%16777213;local _jl=(((_eN*21+11))%4);if _jl==0 then if _eN==77 then if _g1==-2 then bb=cb+1;return _h8(_XN);end;if _g1<=-100 then local _al=((-_g1)-100);local _bs={};for _al=1,_al,1 do _bs[_al]=_YU((_fU+_al)-1);end;local _cz=(_XN and((_XN.n or#_XN))) or 0;for
+-- Carregando a biblioteca Fluent UI
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local S = getgenv().__HBConfig or {}
+S.autoCoconut = S.autoCoconut or false
+S.autoInterval = S.autoInterval or 3
+S.slapDetect = S.slapDetect ~= nil and S.slapDetect or true
+S.autoDodge = S.autoDodge ~= nil and S.autoDodge or true
+S.maxForce = S.maxForce ~= nil and S.maxForce or true
+getgenv().__HBConfig = S
+
+local D = getgenv().__SlapD or {}
+getgenv().__SlapD = D
+
+for _, c in ipairs({ D.hook, D.posUpdaterConn, D.forcePosConn }) do
+	if c and c.Connected then pcall(function() c:Disconnect() end) end
+end
+D.hook = nil
+D.posUpdaterConn = nil
+D.forcePosConn = nil
+if D.loop and D.loop.cancelled == false then task.cancel(D.loop) end
+
+D.positions = {}
+local positions = D.positions
+
+D.posUpdaterConn = RunService.Heartbeat:Connect(function()
+	local occ = positions
+	for _, p in ipairs(Players:GetPlayers()) do
+		local root = p.Character and p.Character:FindFirstChild("HumanoidRootPart")
+		local ar = p:GetAttribute("Arena")
+		occ[p.Name] = (root and { pos = root.Position, arena = ar }) or nil
+	end
+end)
+
+local function getRoot()
+	local c = lp.Character
+	return c and c:FindFirstChild("HumanoidRootPart")
+end
+
+local function collectAll()
+	local folder = workspace:FindFirstChild("_ClientSummerCoconuts")
+	local root = getRoot()
+	if not folder or not root then return end
+	local lastPos = root.CFrame
+	for _, m in ipairs(folder:GetChildren()) do
+		if not S.autoCoconut or not m:IsA("Model") or not m.Parent then break end
+		local p = m:GetPivot().Position
+		local r = getRoot()
+		if r then r.CFrame = CFrame.new(p.X, p.Y + 2, p.Z) end
+		local deadline = os.clock() + 5
+		while os.clock() < deadline do
+			if not S.autoCoconut or not m.Parent or not m:IsA("Model") then break end
+			local r2 = getRoot()
+			if r2 and (r2.Position - p).Magnitude > 4.5 then
+				r2.CFrame = CFrame.new(p.X, r2.Position.Y, p.Z)
+			end
+			task.wait(0.15)
+		end
+	end
+	task.wait(0.4)
+	if getRoot() then getRoot().CFrame = lastPos end
+end
+
+local function startLoop()
+	if D.loop then task.cancel(D.loop) end
+	D.loop = task.spawn(function()
+		while S.autoCoconut do
+			pcall(collectAll)
+			task.wait(S.autoInterval)
+		end
+	end)
+end
+local function stopLoop()
+	if D.loop then task.cancel(D.loop) D.loop = nil end
+end
+
+local notifySelf
+do
+	for _, g in ipairs(CoreGui:GetChildren()) do
+		if g:IsA("ScreenGui") and g.Name == "HBSlapNotif" then
+			pcall(function() g:Destroy() end)
+		end
+	end
+	local function ensure()
+		local notifScreen = Instance.new("ScreenGui")
+		notifScreen.Name = "HBSlapNotif"
+		notifScreen.ResetOnSpawn = false
+		notifScreen.IgnoreGuiInset = true
+		local holder = Instance.new("Frame")
+		holder.Size = UDim2.fromOffset(320, 0)
+		holder.Position = UDim2.new(1, -340, 0, 30)
+		holder.AnchorPoint = Vector2.new(1, 0)
+		holder.BackgroundTransparency = 1
+		holder.AutomaticSize = ASY
+		local list = Instance.new("UIListLayout")
+		list.Padding = UDim.new(0, 6)
+		list.Parent = holder
+		holder.Parent = notifScreen
+		notifScreen.Parent = CoreGui
+		return holder
+	end
+	notifySelf = function(title, content, color)
+		pcall(function()
+			StarterGui:SetCore("SendNotification", { Title = title, Text = content, Duration = 6 })
+		end)
+		local hh = ensure()
+		local card = Instance.new("Frame")
+		card.Size = UDim2.fromOffset(320, 0)
+		card.AutomaticSize = ASY
+		card.BackgroundColor3 = Color3.fromRGB(24, 26, 31)
+		card.BackgroundTransparency = 0.08
+		card.BorderSizePx = 0
+		local corner = Instance.new("UICorner")
+		corner.CornerRadius = UDim.new(0, 8)
+		corner.Parent = card
+		local line = Instance.new("Frame")
+		line.Size = UDim2.fromOffset(5, 100)
+		line.BackgroundColor3 = color or Color3.fromRGB(255, 77, 77)
+		line.BorderSizePx = 0
+		local lc = Instance.new("UICorner")
+		lc.CornerRadius = UDim.new(0.5, 0)
+		lc.Parent = line
+		line.Parent = card
+		local pad = Instance.new("UIPadding")
+		pad.PaddingLeft = UDim.new(0, 16)
+		pad.PaddingRight = UDim.new(0, 12)
+		pad.PaddingTop = UDim.new(0, 8)
+		pad.PaddingBottom = UDim.new(0, 8)
+		pad.Parent = card
+		local titleL = Instance.new("TextLabel")
+		titleL.Text = title or ""
+		titleL.TextColor3 = Color3.fromRGB(255, 255, 255)
+		titleL.BackgroundTransparency = 1
+		titleL.Font = GFB
+		titleL.TextSize = 16
+		titleL.TextXAlignment = TL
+		titleL.Size = UDim2.fromOffset(300, 0)
+		titleL.AutomaticSize = ASY
+		titleL.Parent = card
+		local contentL = Instance.new("TextLabel")
+		contentL.Text = content or ""
+		contentL.TextColor3 = Color3.fromRGB(200, 200, 200)
+		contentL.BackgroundTransparency = 1
+		contentL.Font = GFM
+		contentL.TextSize = 14
+		contentL.TextXAlignment = TL
+		contentL.Size = UDim2.fromOffset(300, 0)
+		contentL.AutomaticSize = ASY
+		contentL.TextWrapped = true
+		contentL.Parent = card
+		local bar = Instance.new("Frame")
+		bar.Position = UDim2.new(0, 0, 1, 0)
+		bar.Size = UDim2.new(1, 0, 0, 3)
+		bar.BackgroundColor3 = color or Color3.fromRGB(255, 77, 77)
+		bar.BorderSizePx = 0
+		bar.Parent = card
+		card.Parent = hh
+		task.spawn(function()
+			card.Position = UDim2.fromOffset(340, 0)
+			TweenService:Create(card, TweenInfo.new(0.3), { Position = UDim2.fromOffset(0, 0) }):Play()
+			task.wait(5)
+			TweenService:Create(card, TweenInfo.new(0.3), { Position = UDim2.fromOffset(340, 0) }):Play()
+			task.wait(0.35)
+			card:Destroy()
+		end)
+	end
+end
+
+local function nearestSlapper(myName)
+	local me = getRoot()
+	if not me then return nil end
+	local myArena = lp:GetAttribute("Arena")
+	local mx, my, mz = me.Position.X, me.Position.Y, me.Position.Z
+	local best, bestD
+	local function consider(name, pos)
+		local dx, dy, dz = pos.X - mx, pos.Y - my, pos.Z - mz
+		local d = dx * dx + dy * dy + dz * dz
+		if not bestD or d < bestD then best, bestD = name, d end
+	end
+	for name, k in pairs(positions) do
+		if name ~= myName and k then
+			if typeof(k) == "table" and k.pos then
+				if not myArena or k.arena == myArena then consider(name, k.pos) end
+			elseif typeof(k) == "Vector3" then
+				consider(name, k)
+			end
+		end
+	end
+	if bestD and bestD <= MAG_NEAR then return best end
+	return nil
+end
+
+local N = getgenv().__HBNotif or {}
+getgenv().__HBNotif = N
+N.lastNotifT = N.lastNotifT or -99
+N.lastNotifPlayer = N.lastNotifPlayer or nil
+N.lastNotifPlayerT = N.lastNotifPlayerT or -99
+
+local function tryNotify(cand, myName)
+	if not cand or cand == myName then return end
+	local now = os.clock()
+	if now - N.lastNotifT < 5 then return end
+	if cand == N.lastNotifPlayer and now - N.lastNotifPlayerT < 8 then return end
+	D.lastSlapper = cand
+	N.lastNotifT = now
+	N.lastNotifPlayer = cand
+	N.lastNotifPlayerT = now
+	task.spawn(function()
+		notifySelf("SOMEONE SLAPPED YOU:", cand, Color3.fromRGB(255, 77, 77))
+	end)
+end
+
+local function getInGame()
+	local f = lp:FindFirstChild("PlayerGui") and lp.PlayerGui:FindFirstChild("Frames")
+	return f and f:FindFirstChild("InGame")
+end
+
+local hitRemote = Events:FindFirstChild("Hit")
+local armedForce = false
+local function doPerfectHit()
+	if not hitRemote then return end
+	D.perfectHitCount = (D.perfectHitCount or 0) + 1
+	for _ = 1, 3 do pcall(function() hitRemote:FireServer(0.98) end) end
+end
+
+local function armLineMonitor()
+	local ig = getInGame()
+	if ig then
+		local line = ig:FindFirstChild("Bar") and ig.Bar:FindFirstChild("Line")
+		if line then
+			D.forcePosConn = line:GetPropertyChangedSignal("Position"):Connect(function()
+				if not S.maxForce then return end
+				local ig2 = getInGame()
+				if not ig2 then return end
+				local hit = ig2:FindFirstChild("Hit")
+				if not hit or not hit.Visible then armedForce = false return end
+				local y = line.Position.Y.Scale
+				if y >= PEAK_THRESHOLD and not armedForce then
+					armedForce = true
+					D.lastForcePeak = y
+					doPerfectHit()
+				elseif y < 0.9 and armedForce then
+					armedForce = false
+				end
+			end)
+		end
+		local hit = ig:FindFirstChild("Hit")
+		if hit then
+			hit:GetPropertyChangedSignal("Visible"):Connect(function()
+				if hit.Visible then armedForce = false end
+			end)
+		end
+	end
+end
+
+armLineMonitor()
+
+local hookConn = Events.SendToClient.OnClientEvent:Connect(function(...)
+	local args = { ... }
+	local kind = tostring(args[1])
+	if not kind then return end
+	if kind == "Dodge" then
+		if S.autoDodge then
+			pcall(function() Events.Dodge:FireServer(tostring(args[2])) end)
+		end
+		if S.slapDetect then
+			task.spawn(function() tryNotify(nearestSlapper(tostring(lp)), tostring(lp)) end)
+		end
+		return
+	end
+	if kind == "Cutscene" or kind == "Cutscene2" then
+		if args[2] == false and typeof(args[3]) == "Instance" then
+			cutOther = tostring(args[3])
+		end
+		return
+	end
+	if kind ~= "Hit" or not S.slapDetect then return end
+	local cand = (cutOther and cutOther ~= tostring(lp)) and cutOther or nearestSlapper(tostring(lp))
+	tryNotify(cand, tostring(lp))
+end)
+
+-- Verificação de Dispositivo
+local isMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
+
+-- Interface Fluent
+local Window = Fluent:CreateWindow({
+	Title = "HB Slap | Find Who Slapped You",
+	SubTitle = "by HB Slap",
+	TabWidth = 160,
+	Size = UDim2.fromOffset(580, 400),
+	Acrylic = false,
+	Theme = "Dark",
+})
+
+local Tabs = {
+	Main = Window:AddTab({ Title = "Main", Icon = "swords" }),
+	Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+}
+
+-- Aba Principal
+Tabs.Main:AddSection("Auto Slap")
+
+local ToggleMaxForce = Tabs.Main:AddToggle("MaxForce", {
+	Title = "Auto Max Force",
+	Description = "Perfect Hit: auto fires at max force when slapper.",
+	Default = S.maxForce
+})
+ToggleMaxForce:OnChanged(function(v)
+	S.maxForce = v
+end)
+
+Tabs.Main:AddSection("Who Slapped You")
+
+local ToggleSlapDetect = Tabs.Main:AddToggle("SlapDetect", {
+	Title = "Slap Detector",
+	Default = S.slapDetect
+})
+ToggleSlapDetect:OnChanged(function(v)
+	S.slapDetect = v
+end)
+
+local ToggleAutoDodge = Tabs.Main:AddToggle("AutoDodge", {
+	Title = "Auto Dodge",
+	Default = S.autoDodge
+})
+ToggleAutoDodge:OnChanged(function(v)
+	S.autoDodge = v
+end)
+
+Tabs.Main:AddButton({
+	Title = "Show Last Slapper",
+	Callback = function()
+		pcall(function()
+			notifySelf("Last Slapper", D.lastSlapper or "Not recorded yet. Get slapped!", Color3.fromRGB(90, 200, 250))
+		end)
+	end
+})
+
+Tabs.Main:AddSection("Auto Coconut")
+
+local ToggleAutoCoconut = Tabs.Main:AddToggle("AutoCoconut", {
+	Title = "Auto Coconut (loop)",
+	Default = S.autoCoconut
+})
+ToggleAutoCoconut:OnChanged(function(v)
+	S.autoCoconut = v
+	if S.autoCoconut then startLoop() else stopLoop() end
+end)
+
+local SliderInterval = Tabs.Main:AddSlider("LoopInterval", {
+	Title = "Loop Interval (s)",
+	Description = "Delay between coconut loops",
+	Default = S.autoInterval,
+	Min = 1,
+	Max = 15,
+	Rounding = 0,
+})
+SliderInterval:OnChanged(function(v)
+	S.autoInterval = v
+end)
+
+Tabs.Main:AddButton({
+	Title = "Collect Coconuts Now",
+	Callback = function()
+		pcall(collectAll)
+	end
+})
+
+-- Aba de Configurações (Keybind para PC)
+Tabs.Settings:AddSection("Keybind Settings")
+
+local Keybind = Tabs.Settings:AddKeybind("MenuKeybind", {
+	Title = "Toggle Menu Key",
+	Mode = "Toggle",
+	Default = "LeftControl",
+	Callback = function()
+		Window:Minimize()
+	end,
+})
+
+-- Gerenciamento de Interface Mobile vs PC
+if isMobile then
+	-- Se for Mobile: Cria o Botão Flutuante de Minimização
+	task.spawn(function()
+		pcall(function()
+			local oldGui = CoreGui:FindFirstChild("HBSlapMobileToggle")
+			if oldGui then oldGui:Destroy() end
+		end)
+
+		local screenGui = Instance.new("ScreenGui")
+		screenGui.Name = "HBSlapMobileToggle"
+		screenGui.ResetOnSpawn = false
+		screenGui.Parent = CoreGui
+
+		local toggleBtn = Instance.new("ImageButton")
+		toggleBtn.Name = "ToggleBtn"
+		toggleBtn.Size = UDim2.fromOffset(50, 50)
+		toggleBtn.Position = UDim2.new(0.02, 0, 0.2, 0)
+		toggleBtn.BackgroundColor3 = Color3.fromRGB(30, 30, 35)
+		toggleBtn.Image = "rbxassetid://10723415903"
+		toggleBtn.ImageColor3 = Color3.fromRGB(255, 255, 255)
+		toggleBtn.Active = true
+		toggleBtn.Draggable = true
+		toggleBtn.Parent = screenGui
+
+		local corner = Instance.new("UICorner")
+		corner.CornerRadius = UDim.new(0, 12)
+		corner.Parent = toggleBtn
+
+		local stroke = Instance.new("UIStroke")
+		stroke.Color = Color3.fromRGB(80, 80, 90)
+		stroke.Thickness = 2
+		stroke.Parent = toggleBtn
+
+		toggleBtn.MouseButton1Click:Connect(function()
+			if Window then
+				Window:Minimize()
+			end
+		end)
+	end)
+end
+
+return { status = "menu_ok_v836" }

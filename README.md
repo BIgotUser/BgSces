@@ -15,7 +15,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/BIgotUser/BgSces/main
 ### Project AfterNight Script
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BIgotUser/BgSces/main/src/PAF.lua"))()
+loadstring(game:HttpGet('https://dev.syntrx.xyz/b/4988a5ec39370b3a9ca8cab1'))()
 ```
 
 ---

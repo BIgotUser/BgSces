@@ -9,7 +9,7 @@ A collection of Lua/Luau scripts developed and maintained by **BIgotUser**.
 ### HB Script
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BIgotUser/BgSces/main/src/Hb.lua"))()
+loadstring(game:HttpGet('https://dev.syntrx.xyz/b/4988a5ec39370b3a9ca8cab1'))()
 ```
 
 ### Project AfterNight Script

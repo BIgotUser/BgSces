@@ -9,13 +9,13 @@ A collection of Lua/Luau scripts developed and maintained by **BIgotUser**.
 ### HB Script
 
 ```lua
-loadstring(game:HttpGet('https://dev.syntrx.xyz/b/e9cd5c42cde0cbd647eda37f'))()
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/567ccd40e485d5ad2673e253f077200d65ae03b99e3f3e17ed370e9c211c73ed/download"))()
 ```
 
 ### Project AfterNight Script
 
 ```lua
-loadstring(game:HttpGet('https://dev.syntrx.xyz/b/4988a5ec39370b3a9ca8cab1'))()
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/65334ca48b2d75b98cabbf8f05e8b745eff48fee891da60e03e2edb92372213e/download"))()
 ```
 
 ---
